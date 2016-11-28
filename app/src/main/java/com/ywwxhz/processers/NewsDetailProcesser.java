@@ -79,6 +79,7 @@ public class NewsDetailProcesser extends BaseProcesserImpl<String, NewsDetailPro
     private VideoWebChromeClient client = new VideoWebChromeClient();
     private boolean showImage;
     private boolean convertFlashToHtml5;
+    private boolean removeAds;
     private boolean fromDB = false;
     private NewsDetailFragment.NewsDetailCallBack callBack;
 
@@ -126,6 +127,7 @@ public class NewsDetailProcesser extends BaseProcesserImpl<String, NewsDetailPro
         initView(view);
         showImage = PrefKit.getBoolean(mActivity, R.string.pref_show_detail_image_key, true);
         convertFlashToHtml5 = PrefKit.getBoolean(mActivity, R.string.pref_flash_to_html5_key, true);
+        removeAds = PrefKit.getBoolean(mActivity, R.string.pref_remove_ads_key, true);
     }
 
     @SuppressLint({"AddJavascriptInterface", "SetJavaScriptEnabled"})
@@ -278,6 +280,9 @@ public class NewsDetailProcesser extends BaseProcesserImpl<String, NewsDetailPro
         mActivity.setTitle(mNewsItem.getTitle());
         String data = String.format(Locale.CHINA, webTemplate, colorString.substring(2, colorString.length()),
                 add, showImage, convertFlashToHtml5, mNewsItem.getTitle(), mNewsItem.getFrom(), mNewsItem.getInputtime(), mNewsItem.getHometext(), mNewsItem.getContent());
+        if (removeAds) {
+            data = data.replaceAll("<p><strong>\\[广告\\]活动入口:</strong></p>\n*<p>.*</p>", "");
+        }
         mWebView.loadDataWithBaseURL(Configure.BASE_URL, data, "text/html", "utf-8", null);
 
         mActionButtom.postDelayed(new Runnable() {

@@ -91,6 +91,9 @@
     <string name="pref_enable_ripple_key">enable_ripple_key</string>
     <string name="pref_enable_ripple_summary">是否启用Android 5.0列表波纹效果</string>
     <string name="pref_enable_ripple_title">Android 5.0 波纹效果</string>
+    <string name="pref_remove_ads_key">remove_ads_key</string>
+    <string name="pref_remove_ads_summary">去掉内容里的“活动入口”，你懂的</string>
+    <string name="pref_remove_ads_title">去除小尾巴</string>
     <string name="pref_crash_key">crash</string>
     <string name="pref_crash_title">立即崩溃</string>
 
